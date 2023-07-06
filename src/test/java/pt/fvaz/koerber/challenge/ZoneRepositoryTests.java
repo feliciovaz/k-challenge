@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,5 +39,14 @@ public class ZoneRepositoryTests {
 
         assertTrue(createdZone.isPresent());
         assertEquals("Downtown", createdZone.get().getName());
+    }
+
+    @Test
+    void shouldFindByName() {
+        Collection<Zone> zonesFound = zoneRepository.findByName("Jamaica Bay");
+
+        assertEquals(1, zonesFound.size());
+        assertEquals(23, zonesFound.stream().toList().get(0).getId());
+        assertEquals("Jamaica Bay", zonesFound.stream().toList().get(0).getName());
     }
 }

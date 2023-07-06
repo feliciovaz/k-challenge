@@ -45,7 +45,7 @@ public class TripRepositoryTests {
         tripRepository.saveAndFlush(
                 new Trip(null, 24, 46,
                         LocalDateTime.of(2018,1,2,6,18,50),
-                        LocalDateTime.of(2018,1,2,7,00,59),
+                        LocalDateTime.of(2018,1,2,7,0,59),
                         false));
 
         Optional<Trip> createdTrip = tripRepository.findById(2L);
@@ -55,4 +55,23 @@ public class TripRepositoryTests {
         assertEquals(24, createdTrip.get().getPickUpZoneId());
         assertEquals(46, createdTrip.get().getDropOffZoneId());
     }
+
+    @Test
+    void shouldCountPickusForZoneAndDay() {
+        int pus = tripRepository.countPickUpsForZoneAndDay(
+                LocalDateTime.of(2018,1,1,0,0,0),
+                LocalDateTime.of(2018,1,2,0,0,0),
+                23);
+        assertEquals(1, pus);
+    }
+
+    @Test
+    void shouldCountDropOffsForZoneAndDay() {
+        int dropOffs = tripRepository.countDropOffsForZoneAndDay(
+                LocalDateTime.of(2018,1,1,0,0,0),
+                LocalDateTime.of(2018,1,2,0,0,0),
+                45);
+        assertEquals(1, dropOffs);
+    }
+
 }
