@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import pt.fvaz.koerber.challenge.entity.Zone;
 
 @Repository
-public interface ZoneRepository extends JpaRepository<Zone, Integer> {
+public interface ZoneRepository extends JpaRepository<Zone, Long> {
     Collection<Zone> findByName(String name);
 }

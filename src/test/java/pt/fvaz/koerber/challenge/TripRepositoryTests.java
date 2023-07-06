@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import pt.fvaz.koerber.challenge.entity.Trip;
+import pt.fvaz.koerber.challenge.repository.TopZoneAux;
 import pt.fvaz.koerber.challenge.repository.TripRepository;
 
 @DataJpaTest
@@ -74,4 +76,10 @@ public class TripRepositoryTests {
         assertEquals(1, dropOffs);
     }
 
+    @Test
+    void shoudGetTopZonesByPickUpZone() {
+        Collection<TopZoneAux> topInfo = tripRepository.topPickUpsByZoneId();
+
+        topInfo.stream().forEach(System.out::println);
+    }
 }

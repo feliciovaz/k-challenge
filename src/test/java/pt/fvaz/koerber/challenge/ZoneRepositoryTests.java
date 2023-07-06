@@ -35,7 +35,7 @@ public class ZoneRepositoryTests {
     void shouldAddZone() {
         zoneRepository.saveAndFlush(new Zone(42,"Downtown"));
 
-        Optional<Zone> createdZone = zoneRepository.findById(42);
+        Optional<Zone> createdZone = zoneRepository.findById(42L);
 
         assertTrue(createdZone.isPresent());
         assertEquals("Downtown", createdZone.get().getName());
