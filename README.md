@@ -1,6 +1,13 @@
 # k-challenge
 NY cabs trips
 
+# Build
+git clone git@github.com:feliciovaz/k-challenge.git
+cd k-challenge
+mvn clean package
+docker build -t challenge-1.0.0.jar .
+docker compose up
+
 # Curl commands
 
 ## Upload trips
