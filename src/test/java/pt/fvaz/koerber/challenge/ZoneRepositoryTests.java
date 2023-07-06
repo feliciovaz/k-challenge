@@ -2,8 +2,10 @@ package pt.fvaz.koerber.challenge;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +28,15 @@ public class ZoneRepositoryTests {
 
         assertNotNull(zones);
         assertEquals(2, zones.size());
+    }
+
+    @Test
+    void shouldAddZone() {
+        zoneRepository.saveAndFlush(new Zone(42,"Downtown"));
+
+        Optional<Zone> createdZone = zoneRepository.findById(42);
+
+        assertTrue(createdZone.isPresent());
+        assertEquals("Downtown", createdZone.get().getName());
     }
 }

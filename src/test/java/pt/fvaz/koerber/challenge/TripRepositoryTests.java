@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,21 @@ public class TripRepositoryTests {
         assertEquals(LocalDateTime.of(2018,1,1,0,18,50), trip.getPickUpTime());
         assertEquals(LocalDateTime.of(2018,1,1,0,24,39), trip.getDropOffTime());
 
+    }
+
+    @Test
+    void shouldAddTrip() {
+        tripRepository.saveAndFlush(
+                new Trip(null, 24, 46,
+                        LocalDateTime.of(2018,1,2,6,18,50),
+                        LocalDateTime.of(2018,1,2,7,00,59),
+                        false));
+
+        Optional<Trip> createdTrip = tripRepository.findById(2L);
+
+        assertTrue(createdTrip.isPresent());
+        assertEquals(2, createdTrip.get().getId());
+        assertEquals(24, createdTrip.get().getPickUpZoneId());
+        assertEquals(46, createdTrip.get().getDropOffZoneId());
     }
 }
