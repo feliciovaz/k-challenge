@@ -34,7 +34,7 @@ public class UploadDataController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UploadDataController.class);
     private final TripRepository tripRepository;
     private final ZoneRepository zoneRepository;
-    private static final DateTimeFormatter formatter = ofPattern("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    private static final DateTimeFormatter FORMATTER = ofPattern("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
     public UploadDataController(TripRepository tripRepository, ZoneRepository zoneRepository) {
         this.tripRepository = tripRepository;
@@ -86,8 +86,8 @@ public class UploadDataController {
         try {
             int puZoneId = getLocationId(fields[5]);
             int doZoneId = getLocationId(fields[6]);
-            LocalDateTime pickUpTime = LocalDateTime.parse(fields[1], formatter);
-            LocalDateTime dropOffTime = LocalDateTime.parse(fields[2], formatter);
+            LocalDateTime pickUpTime = LocalDateTime.parse(fields[1], FORMATTER);
+            LocalDateTime dropOffTime = LocalDateTime.parse(fields[2], FORMATTER);
 
             return Stream.of(new Trip(null, puZoneId, doZoneId, pickUpTime, dropOffTime, isYellow));
         } catch (Exception ex) {
