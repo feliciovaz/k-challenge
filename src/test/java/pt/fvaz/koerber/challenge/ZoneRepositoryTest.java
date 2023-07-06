@@ -16,7 +16,7 @@ import pt.fvaz.koerber.challenge.entity.Zone;
 import pt.fvaz.koerber.challenge.repository.ZoneRepository;
 
 @DataJpaTest
-public class ZoneRepositoryTests {
+public class ZoneRepositoryTest {
 
     @Autowired
     private ZoneRepository zoneRepository;
@@ -28,7 +28,7 @@ public class ZoneRepositoryTests {
         zones.stream().forEach(System.out::println);
 
         assertNotNull(zones);
-        assertEquals(2, zones.size());
+        assertEquals(6, zones.size());
     }
 
     @Test
